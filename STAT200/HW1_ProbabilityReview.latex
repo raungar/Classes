@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\graphicspath{{/STAT200/}}
+\title{STAT200 HW1}
+\author{Rachel Ungar }
+\date{January 16 2020}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Two dice are rolled, and the sum of the face values is six. What is the probability that at least one of the dice came up a three?
+
+\begin{center}
+When rolling two dices $(D_1 , D_2 )$ ,  the possible ways that the sum of two dice can equal six are as follows:
+
+\end{center}
+
+\begin{center}
+1.  $D_1=1, D_2=2$ \newline 2. $D_1=2, D_2=4$ \newline 3. $D_1=3, D_2=3$ \newline 4. $D_1=4, D_2=2$ \newline 5. $D_1=5, D_2=1$ \newline 
+\end{center}
+Therefore, there are five total ways in which two dice can sum to six. Of these five ways, there is just one way $(D_1=3, D_2=3)$ in which at least one of the dice comes up with a three. Therefore, the probability that at least one of the dice came up with a three is $1/5$.
+\newline
+This can also be done using Bayes' theroem where $P(A)$ is probability of at least one dice being a three, and $P(B)$ being the probability that that the sum of the dice is six.
+    \begin{equation*}
+    \begin{gathered}
+        P(A|B) = \frac{P(B|A)P(A)}{P(B)} \\
+        P(B)=1, P(A)=\frac{1}{5}, P(B|A)=1 \\
+        P(A|B) =1*\frac{1}{5}/1 = 1/5 
+    \end{gathered}
+    \end{equation*}
+
+\newpage
+\section*{Problem 2}
+Sketch the PDF and CDF of a random variable that is uniform on $[-1,1]$
+
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{hw1Problem2.jpg}
+\end{figure}
+
+\newpage
+\section*{Problem 3}
+Find the upper 75\% and lower 25\% quartiles of the exponential distribution with mean parameter $\lambda = 1$
+\begin{center}
+    The CDF when $\lambda = 1$ of the exponential distribution is as follows
+    \begin{equation*}
+          F(x)=\int_{-\infty}^{\infty}f(u)du = 
+        \begin{cases}
+        1-e^{-x} & \text{, $x\geq0$}\\
+        0 & \text{, $x<0$}\\
+        \end{cases}
+    \end{equation*}
+    \newline
+    Therefore, at the lower quartile:
+    \begin{equation*}
+    \begin{gathered}
+        1-e^{-x}=1/4\\ 
+        ln(3/4 = e^{-x}\\ 
+        x = -ln(3/4) \approx 0.288 
+    \end{gathered}
+    \end{equation*}
+    \newline
+    And at the upper quartile:
+      \begin{equation*}
+    \begin{gathered}
+        1-e^{-x}=3/4\\ 
+        ln(1/4 = e^{-x}\\ 
+        x = -ln(1/4) \approx 1.386 
+    \end{gathered}
+    \end{equation*}
+    
+\end{center}
+
+\newpage
+\section*{Problem 4}
+If $X \sim N(\mu, \sigma^2)$, what is the distribution of $Z = (X= \mu)/\sigma$?
+\newline
+    \begin{equation*}
+    \begin{gathered}
+        F_Z(z)=P(Z\leq z)=P(\frac{X-\mu}{\sigma} \leq z)\\
+         = P(X \leq z\sigma + \mu)\\
+         = F_X(z\sigma + \mu)\\
+         \frac{d}{dz}F_Z(z) = \frac{d}{dz}F_X(z\sigma + \mu)\\
+         = \sigma f_X(z\sigma + \mu)\\
+         = \sigma \frac{1}{\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{z\sigma + \mu - \mu}{\sigma}})^2 \\
+         = \frac{1}{\sqrt{2\pi}}e^{\frac{-1}{2}z^2} \\
+         Z \sim N(0,1)
+    \end{gathered}
+    \end{equation*}
+What is the distribution of $Z^2$?
+    \begin{equation*}
+    \begin{gathered}
+        U = Z^2 = \frac{(X-\mu)^2}{\sigma^2} \\
+            F_U(u)=P(U\leq u)=P(\frac{(X-\mu)^2}{\sigma^2} \leq u)\\
+         = P(\sqrt{(X-\mu)^2} \leq \sqrt{u \sigma^2})\\
+         = P(-\sqrt{u} \sigma  \leq X-\mu \leq \sqrt{u} \sigma)\\
+         = P(-\sqrt{u} \sigma  + \mu \leq X \leq \sqrt{u} \sigma + \mu)\\
+         \text{Give this is normally distributed} \\
+         =2 F_X(\sqrt{u}\sigma + \mu)-1\\
+         \frac{d}{du}F_U(u) = \frac{d}{du}(2F_X(\sqrt{u}\sigma + \mu)-1)\\
+         = \frac{1}{2\sqrt{u}}\sigma 2f_X(\sqrt{u}\sigma + \mu)\\
+         = \frac{\sigma}{\sqrt{u}} \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{\sqrt{u}\sigma + \mu - \mu}{\sigma}})^2 \\
+         = \frac{1}{\sqrt{2u\pi}}e^{\frac{-u}{2}} \\
+
+    \end{gathered}
+    \end{equation*}
+    
+\newpage
+\section*{Problem 5}
+
+Let $T_1$ and $T_2$ be two independent exponentials with parameters $\lambda_1$ and $\lambda_2$ respectively. Find the density of $T_1 + T_2$
+    \begin{equation*}
+    \begin{gathered}
+        S = T_1 + T_2 \text{ therefore } T_2=S-T_1\\
+          F_S(s)=\int_{0}^{s}\lambda_1e^{-\lambda_1t_1}\lambda_2e^{-\lambda_2(s-t_1)}dt_1 \\
+          = \lambda_1\lambda_2\int_{0}^{s}e^{-\lambda_1t_1+\lambda_2t_1-\lambda_2s} \\
+          = \lambda_1\lambda_2\int_{0}^{s}e^{(\lambda_2-\lambda_1)t_1-\lambda_2s} \\
+          = \lambda_1\lambda_2\frac{1}{\lambda_2-\lambda_1}[e^{(\lambda_2-\lambda_1)t_1-\lambda_2S}]_0^s \\
+          =\frac{\lambda_1\lambda_2}{\lambda_2-\lambda_1}(-e^{-\lambda_2 s}+e^{-\lambda_1 s +\lambda_2 s - \lambda_2 s}) \\
+          =\frac{\lambda_1\lambda_2}{\lambda_2-\lambda_1}(-e^{-\lambda_2 s}+ e^{-\lambda_1 s})
+    \end{gathered}
+    \end{equation*}
+
+\newpage
+\section*{Problem 6}
+Let  $X_1, ..., X_n$ be iid exponential random variables with rate $\lambda=1$, what is the distribution of $U = min \{X_1, ..., X_n\}$?
+    \begin{equation*}
+    \begin{gathered}
+        \text{As per Rice Ch3.7, the minimum of U is found by} \\
+        f_U(u)=nf(u)[1-F(u)]^{n-1} \\
+        \text{therefore for an exponential function} \\
+        f_U(u)= \lambda e^{-\lambda x} \text{ and } F_U(u)= 1 - \lambda e^{-\lambda x} \\
+        \text{therefore} \\
+        f_U(u) = n( \lambda e^{-\lambda x} )(1 - (1 - \lambda e^{-\lambda x}))^{n-1} \\
+        \text{we are given $\lambda = 1$ so} \\
+        f_U(u) = n(e^{-x} )(1 - (1 -e^{-x}))^{n-1} \\
+        =n(e^{-x-xn+x}) \\
+        = ne^{-xn} 
+        
+        
+    \end{gathered}
+    \end{equation*}
+
+
+\newpage
+\section*{Problem 7}
+If $X$ and $Y$ are independent random variables with equal variances, find $Cov(X+Y,X-Y)$
+    \begin{equation*}
+    \begin{gathered}
+        Cov(X+Y,X-Y) = Cov(X,X) + Cov(Y,X) - Cov(X,Y) - Cov(Y, Y) \\
+        \text{because } Cov(Y,X) = Cov(X,Y) \\
+        = Cov(X,X)-Cov(Y,Y) \\
+        = Var(X) - Var(Y) \\
+        \text{Since we know these variances are equal where } Var(X) = Var(Y) \\
+        = Var(X) - Var(X) \\
+        = 0
+        
+    \end{gathered}
+    \end{equation*}
+\end{document}
